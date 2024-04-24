@@ -18,10 +18,21 @@ echo "Welcome back, $USERNAME! You have played $GAMES_PLAYED games, and your bes
 fi
 echo "Guess the secret number between 1 and 1000:"
 read GUESS
-while [[ $GUESS -ne $SECRET_NUMBER ]]
+
+while ! [[ "$GUESS" =~ ^[0-9]+$ ]]
 do
-TRIES=$(( $TRIES + 1 )) 
-if [[ $GUESS -lt $SECRET_NUMBER ]]
+echo "That pattern does not begin with digits." 
+read GUESS
+done
+
+while [[ $GUESS -ne $SECRET_NUMBER ]] 
+do
+TRIES=$(( $TRIES + 1 ))
+if ! [[ "$GUESS" =~ ^[0-9]+$ ]]
+then
+echo "That is not an integer, guess again." 
+read GUESS
+elif [[ $GUESS -lt $SECRET_NUMBER ]]
 then
 echo "It's higher than that, guess again:"
 read GUESS
@@ -29,7 +40,13 @@ elif [[ $GUESS -gt $SECRET_NUMBER ]]
 then
 echo "It's lower than that, guess again:"
 read GUESS
+
 fi
+  while ! [[ "$GUESS" =~ ^[0-9]+$ ]]
+  do
+  echo "That pattern does not begin with digits." 
+  read GUESS
+  done
 done
 OLD_GAMES_PLAYED=$($PSQL "select games_played from users where user_name='$USERNAME'");
 OLD_HIGHSCORE=$($PSQL "select best_game from users where user_name='$USERNAME'");

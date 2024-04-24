@@ -13,13 +13,15 @@ RESULT_INSERT=$($PSQL "insert into users (user_name) values ('$USERNAME')");
 else
 GAMES_PLAYED=$($PSQL "select games_played from users where user_name='$USERNAME'");
 BEST_GAME=$($PSQL "select best_game from users where user_name='$USERNAME'");
-echo "Welcome back, $USERNAME! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses." 
+echo -e "Welcome back, $USERNAME! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses."
+#echo -e "Welcome back, $USERNAME! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses." 
 fi
 echo "Guess the secret number between 1 and 1000:"
 read GUESS
 
 while ! [[ "$GUESS" =~ ^[0-9]+$ ]]
 do
+TRIES=$(( $TRIES + 1 ))
 echo "That is not an integer, guess again:" 
 read GUESS
 done
@@ -40,10 +42,12 @@ read GUESS
 fi
   while ! [[ "$GUESS" =~ ^[0-9]+$ ]]
   do
+  TRIES=$(( $TRIES + 1 ))
   echo "That is not an integer, guess again:" 
   read GUESS
   done
 done
+TRIES=$(( $TRIES + 1 ))
 OLD_GAMES_PLAYED=$($PSQL "select games_played from users where user_name='$USERNAME'");
 OLD_HIGHSCORE=$($PSQL "select best_game from users where user_name='$USERNAME'");
 NEW_GAMES_PLAYED=$(( $OLD_GAMES_PLAYED + 1 ));
@@ -52,4 +56,4 @@ if [[ $TRIES -lt $OLD_HIGHSCORE ]] || [[ $OLD_HIGHSCORE -eq 0 ]]
 then
 RESULT_INSERT_GAMES_PLAYED=$($PSQL "update users set best_game=$TRIES where user_name='$USERNAME'");
 fi
-echo "You guessed it in $TRIES tries. The secret number was $SECRET_NUMBER. Good job!"
+echo -e "You guessed it in $TRIES tries. The secret number was $SECRET_NUMBER. Nice job!"

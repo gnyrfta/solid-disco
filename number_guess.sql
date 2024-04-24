@@ -60,24 +60,8 @@ ALTER TABLE public.users OWNER TO freecodecamp;
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.users VALUES ('ösldf', 9, 1);
-INSERT INTO public.users VALUES ('user_1713976626328', 597, 2);
-INSERT INTO public.users VALUES ('user_1713977666756', 885, 2);
-INSERT INTO public.users VALUES ('user_1713976626329', 64, 5);
-INSERT INTO public.users VALUES ('user_1713977666757', 54, 5);
-INSERT INTO public.users VALUES ('user_1713977021288', 26, 2);
-INSERT INTO public.users VALUES ('user_1713977021289', 168, 5);
-INSERT INTO public.users VALUES ('David', 7, 3);
-INSERT INTO public.users VALUES ('user_1713977672298', 37, 2);
-INSERT INTO public.users VALUES ('user_1713977672299', 39, 5);
-INSERT INTO public.users VALUES ('user_1713977351094', 235, 2);
-INSERT INTO public.users VALUES ('user_1713977351095', 9, 5);
-INSERT INTO public.users VALUES ('user_1713977418558', 86, 2);
-INSERT INTO public.users VALUES ('user_1713977674641', 51, 2);
-INSERT INTO public.users VALUES ('user_1713977418559', 85, 5);
-INSERT INTO public.users VALUES ('user_1713977674642', 358, 5);
-INSERT INTO public.users VALUES ('user_1713977508495', 32, 2);
-INSERT INTO public.users VALUES ('user_1713977508496', 467, 5);
+INSERT INTO public.users VALUES ('user_1713982373235', 250, 2);
+INSERT INTO public.users VALUES ('user_1713982373236', 70, 5);
 
 
 --

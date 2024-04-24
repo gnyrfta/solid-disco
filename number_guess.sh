@@ -3,7 +3,6 @@
 PSQL="psql --username=freecodecamp --dbname=number_guess -t --no-align -c";
 SECRET_NUMBER=$(( $RANDOM % 1000 ));
 TRIES=0;
-echo $SECRET_NUMBER;
 echo  "Enter your username:"
 read USERNAME;
 RESULT_USER_QUERY=$($PSQL "select user_name from users where user_name='$USERNAME'");

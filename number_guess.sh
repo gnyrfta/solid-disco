@@ -20,18 +20,15 @@ read GUESS
 
 while ! [[ "$GUESS" =~ ^[0-9]+$ ]]
 do
-echo "That pattern does not begin with digits." 
+echo "That is not an integer, guess again:" 
 read GUESS
 done
 
 while [[ $GUESS -ne $SECRET_NUMBER ]] 
 do
 TRIES=$(( $TRIES + 1 ))
-if ! [[ "$GUESS" =~ ^[0-9]+$ ]]
-then
-echo "That is not an integer, guess again." 
-read GUESS
-elif [[ $GUESS -lt $SECRET_NUMBER ]]
+
+if [[ $GUESS -lt $SECRET_NUMBER ]]
 then
 echo "It's higher than that, guess again:"
 read GUESS
@@ -43,14 +40,12 @@ read GUESS
 fi
   while ! [[ "$GUESS" =~ ^[0-9]+$ ]]
   do
-  echo "That pattern does not begin with digits." 
+  echo "That is not an integer, guess again:" 
   read GUESS
   done
 done
 OLD_GAMES_PLAYED=$($PSQL "select games_played from users where user_name='$USERNAME'");
 OLD_HIGHSCORE=$($PSQL "select best_game from users where user_name='$USERNAME'");
-echo "This is old highscore: $OLD_HIGHSCORE";
-echo "This is score: $TRIES";
 NEW_GAMES_PLAYED=$(( $OLD_GAMES_PLAYED + 1 ));
 RESULT_INSERT_GAMES_PLAYED=$($PSQL "update users set games_played=$NEW_GAMES_PLAYED where user_name='$USERNAME'");
 if [[ $TRIES -lt $OLD_HIGHSCORE ]] || [[ $OLD_HIGHSCORE -eq 0 ]]
